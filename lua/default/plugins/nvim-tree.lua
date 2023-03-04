@@ -23,5 +23,3 @@ nvimtree.setup({
   }
 })
 
-
-

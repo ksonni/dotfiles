@@ -29,6 +29,8 @@ end
 return packer.startup(function(use)
   
   use("wbthomason/packer.nvim")
+  
+  use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
   use("bluz71/vim-nightfly-guicolors") -- preferred colorscheme 
   
@@ -38,7 +40,10 @@ return packer.startup(function(use)
   
   use("numToStr/Comment.nvim") -- commenting with gc
   
+  use("nvim-tree/nvim-tree.lua") -- file explorer
 
+  use("nvim-tree/nvim-web-devicons") -- vs-code like icons
+ 
   if packer_bootstrap then
     require("packer").sync()
   end

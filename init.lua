@@ -1,6 +1,9 @@
-require("default.plugins-setup")
-require("default.core.options")
-require("default.core.keymaps")
-require("default.core.colorscheme")
-require("default.plugins.comment")
+user = "default"
+
+require(user .. ".plugins-setup")
+require(user .. ".core.options")
+require(user .. ".core.keymaps")
+require(user .. ".core.colorscheme")
+require(user .. ".plugins.comment")
+require(user .. ".plugins.nvim-tree")
 

@@ -75,3 +75,9 @@ lspconfig["tailwindcss"].setup({
   on_attach = on_attach,
 })
 
+-- configure vuejs server
+lspconfig["vuels"].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+

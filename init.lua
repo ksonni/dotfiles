@@ -15,4 +15,5 @@ require(user .. "plugins.lsp.lspconfig")
 require(user .. "plugins.autopairs")
 require(user .. "plugins.treesitter")
 require(user .. "plugins.gitsigns")
+require(user .. "plugins.git-blame")
 

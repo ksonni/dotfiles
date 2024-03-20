@@ -18,6 +18,7 @@ end
 
 -- load vs-code like snippets from plugins (e.g. friendly-snippets)
 require("luasnip/loaders/from_vscode").lazy_load()
+require("luasnip/loaders/from_vscode").lazy_load { paths = "./snippets/markdown" }
 
 cmp.setup({
   snippet = {

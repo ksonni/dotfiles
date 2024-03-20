@@ -1,0 +1,30 @@
+{
+	"Journal template": {
+		"prefix": "day",
+		"body": [
+			"## \\[day\\] \\[dd/mm/yyy\\] - \\[hh:mm\\]",
+			"",
+			"### Stats",
+			"- Study: x/5",
+			"- Work:",
+			"- Meditation:",
+			"- Food:",
+			"- Social:",
+			"- Skin: ",
+			"- Gym:",
+			"- Wank:",
+			"- Shower:",
+			"- Cleanliness:",
+			"- Mood:",
+			"- Sleep:",
+			"",
+			"### Account",
+			"",
+			"",
+			"### Takeaways",
+			""
+		],
+		"description": "Daily journal template",
+	},
+}
+

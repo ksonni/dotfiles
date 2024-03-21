@@ -33,5 +33,9 @@ return require('packer').startup(function(use)
 
   -- undo history
   use('mbbill/undotree')
+
+  -- git history
+  use("tpope/vim-fugitive")
+
 end)
 

@@ -27,6 +27,11 @@ return require('packer').startup(function(use)
 	ts_update()
     end
   }
+ 
+  -- tabless navigation
+  use('theprimeagen/harpoon')
 
+  -- undo history
+  use('mbbill/undotree')
 end)
 

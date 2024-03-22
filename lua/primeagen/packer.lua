@@ -61,5 +61,8 @@ return require('packer').startup(function(use)
 	  }
   }
 
+  -- bracket closing
+  use("windwp/nvim-autopairs")
+
 end)
 

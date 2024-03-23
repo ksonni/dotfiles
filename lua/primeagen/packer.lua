@@ -64,5 +64,13 @@ return require('packer').startup(function(use)
   -- bracket closing
   use("windwp/nvim-autopairs")
 
+  -- commenting
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+  }
+
 end)
 

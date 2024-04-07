@@ -71,4 +71,10 @@ return require('packer').startup(function(use)
         'kevinhwang91/nvim-ufo',
         requires = 'kevinhwang91/promise-async'
     }
+
+    -- status line
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    }
 end)

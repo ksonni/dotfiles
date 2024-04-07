@@ -9,14 +9,11 @@ return require('packer').startup(function(use)
       'nvim-telescope/telescope.nvim', tag = '0.1.4', 
       requires = { {'nvim-lua/plenary.nvim'} }
   }
-	
+
   -- color scheme
   use({
-      'rose-pine/neovim',
-      as = 'rose-pine',
-      config = function()
-	  vim.cmd('colorscheme rose-pine')
-      end
+    'Mofiqul/dracula.nvim',
+    as = 'dracula',
   })
 
   -- syntax highlighting

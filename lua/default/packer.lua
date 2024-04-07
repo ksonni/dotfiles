@@ -28,9 +28,6 @@ return require('packer').startup(function(use)
     -- tabless navigation
     use('theprimeagen/harpoon')
 
-    -- undo history
-    use('mbbill/undotree')
-
     -- git history
     use("tpope/vim-fugitive")
 

@@ -32,3 +32,9 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
+
+vim.keymap.set('n', '<C-w><Right>', '<cmd>vertical resize +10<CR>')
+vim.keymap.set('n', '<C-w><Left>', '<cmd>vertical resize -10<CR>')
+vim.keymap.set('n', '<C-w><Up>', '<cmd>resize +5<CR>')
+vim.keymap.set('n', '<C-w><Down>', '<cmd>resize -5<CR>')
+

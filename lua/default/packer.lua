@@ -77,4 +77,12 @@ return require('packer').startup(function(use)
         'nvim-lualine/lualine.nvim',
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
+
+    -- lsp progress in status line
+    use {
+        'linrongbin16/lsp-progress.nvim',
+        config = function ()
+            require('lsp-progress').setup()
+        end
+    }
 end)

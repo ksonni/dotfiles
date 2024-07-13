@@ -1,4 +1,7 @@
-local dracula = require('dracula')
+local ok, dracula = pcall(require, 'dracula')
+if not ok then
+    return
+end
 
 dracula.setup({})
 

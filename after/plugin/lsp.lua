@@ -1,4 +1,9 @@
-local lsp = require("lsp-zero")
+local lsp_ok, lsp = pcall(require, "lsp-zero")
+local cmp_ok, cmp = pcall(require, 'cmp')
+
+if not lsp_ok or not cmp_ok then
+    return
+end
 
 lsp.preset("recommended")
 
@@ -11,7 +16,6 @@ lsp.ensure_installed({
 lsp.nvim_workspace()
 
 
-local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),

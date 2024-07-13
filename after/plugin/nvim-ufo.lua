@@ -1,4 +1,7 @@
-local ufo = require("ufo")
+local ok, ufo = pcall(require, "ufo")
+if not ok then
+    return
+end
 
 -- Enable vim folding in general
 vim.o.foldcolumn = '0'

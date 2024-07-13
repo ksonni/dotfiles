@@ -1,11 +1,16 @@
-require('lualine').setup {
+local ok, lualine = pcall(require, "lualine")
+if not ok then
+    return
+end
+
+lualine.setup {
     options = { theme = 'dracula' },
     sections = {
         lualine_c = {
             {
                 'filename',
                 file_status = true, -- readonly/modified etc.
-                path = 1, -- 0 = name, 1 = relative path, 2 = full
+                path = 1,           -- 0 = name, 1 = relative path, 2 = full
             },
         },
         lualine_x = {
@@ -23,4 +28,3 @@ vim.api.nvim_create_autocmd("User", {
     pattern = 'LspProgressStatusUpdated',
     callback = require('lualine').refresh
 })
-

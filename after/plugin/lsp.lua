@@ -8,13 +8,14 @@ end
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-    'tsserver',
+    'ts_ls',
     'gopls',
+    'bufls',
+    'pbls',
 })
 
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
-
 
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({

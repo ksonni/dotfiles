@@ -1,0 +1,40 @@
+" symlink this to the home directory
+
+let mapleader = " "
+
+" Bookmarks
+nmap <leader>a :action ToggleBookmark<CR>
+nmap <leader>a1 :action ToggleBookmark1<CR>
+nmap <leader>1 :action GotoBookmark1<CR>
+nmap <leader>a2 :action ToggleBookmark2<CR>
+nmap <leader>2 :action GotoBookmark2<CR>
+nmap <leader>a3 :action ToggleBookmark3<CR>
+nmap <leader>3 :action GotoBookmark3<CR>
+nmap <leader>a4 :action ToggleBookmark4<CR>
+nmap <leader>4 :action GotoBookmark4<CR>
+nmap <leader>a5 :action ToggleBookmark5<CR>
+nmap <leader>5 :action GotoBookmark5<CR>
+nmap <leader>e :action ShowBookmarks<CR>
+
+" CLipboard actions
+nmap <leader>y "+y
+vmap <leader>y "+y
+
+" File management
+nmap <leader>f :action NewGroup<CR>
+
+" Diagnostics
+" Shift K works for diagnostics anyway
+" Option enter works for errors
+
+nmap <leader>r :action RenameElement<CR>
+nmap <leader>rf :action RenameFile<CR>
+
+nmap <leader>n :action GotoNextError<CR>
+nmap <leader>p :action GotoPreviousError<CR>
+
+
+" git
+nmap <leader>gb :action Vcs.ShowHistoryForBlock<CR>
+vmap <leader>gb :action Vcs.ShowHistoryForBlock<CR>
+

@@ -3,7 +3,11 @@ if not ok then
     return
 end
 
-dracula.setup({})
+dracula.setup({
+    colors = {
+        bg = "#2B2D30",
+    }
+})
 
 vim.cmd.colorscheme('dracula')
 

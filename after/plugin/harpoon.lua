@@ -16,6 +16,6 @@ vim.keymap.set("n", "<leader>4", function() ui.nav_file(4) end)
 
 harpoon.setup({
     menu = {
-        width = 64,
+        width = 96,
     },
 })

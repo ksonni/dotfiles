@@ -18,7 +18,7 @@ return require('packer').startup(function(use)
     -- File finder
     use {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.4',
+        commit = "b4da76b",
         requires = {
             { 'nvim-lua/plenary.nvim', commit = "b9fd522" },
         },

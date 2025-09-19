@@ -58,14 +58,20 @@ capabilities.textDocument.foldingRange = {
     lineFoldingOnly = true,
 }
 
+local ok_telescope, telescope = pcall(require, "telescope.builtin")
+
 -- LSP remaps
 local on_attach = function(_, bufnr)
     local map = function(mode, lhs, rhs, desc)
         vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, remap = false, silent = true, desc = desc })
     end
 
-    map("n", "gd", "<cmd>Telescope lsp_definitions<cr>")
-    map("n", "gr", "<cmd>Telescope lsp_references<cr>")
+    if ok_telescope then
+        map("n", "gd", function() telescope.lsp_definitions() end)
+        map("n", "gr", function() telescope.lsp_references() end)
+        map("n", "gi", function() telescope.lsp_implementations() end)
+    end
+
     map("n", "K", function() vim.lsp.buf.hover() end, "Hover")
     map("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, "Workspace symbols")
     map("n", "<leader>d", function() vim.diagnostic.open_float() end, "Line diagnostics")

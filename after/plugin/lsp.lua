@@ -64,7 +64,8 @@ local on_attach = function(_, bufnr)
         vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, remap = false, silent = true, desc = desc })
     end
 
-    map("n", "gd", function() vim.lsp.buf.definition() end, "Goto definition")
+    map("n", "gd", "<cmd>Telescope lsp_definitions<cr>")
+    map("n", "gr", "<cmd>Telescope lsp_references<cr>")
     map("n", "K", function() vim.lsp.buf.hover() end, "Hover")
     map("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, "Workspace symbols")
     map("n", "<leader>d", function() vim.diagnostic.open_float() end, "Line diagnostics")

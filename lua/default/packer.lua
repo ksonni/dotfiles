@@ -40,30 +40,28 @@ return require('packer').startup(function(use)
     use('theprimeagen/harpoon')
 
     -- git history
-    use("tpope/vim-fugitive")
+    use('tpope/vim-fugitive')
 
     -- lsp
+    use('neovim/nvim-lspconfig')
+    use('williamboman/mason.nvim')
+    use('williamboman/mason-lspconfig.nvim')
+
     use {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v4.x',
-        requires = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' },
-            { 'williamboman/mason.nvim' },
-            { 'williamboman/mason-lspconfig.nvim' },
+      'hrsh7th/nvim-cmp',
+      requires = {
+        -- Autocompletion
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-path',
+        'hrsh7th/cmp-cmdline',
+        'hrsh7th/cmp-nvim-lua',
 
-            -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },
-            { 'hrsh7th/cmp-buffer' },
-            { 'hrsh7th/cmp-path' },
-            { 'saadparwaiz1/cmp_luasnip' },
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'hrsh7th/cmp-nvim-lua' },
-
-            -- Snippets
-            { 'L3MON4D3/LuaSnip' },
-            { 'rafamadriz/friendly-snippets' },
-        }
+        -- Snippets
+        'saadparwaiz1/cmp_luasnip',
+        'L3MON4D3/LuaSnip',
+        'rafamadriz/friendly-snippets',
+      },
     }
 
     -- bracket closing

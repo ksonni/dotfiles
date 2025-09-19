@@ -4,6 +4,7 @@ This is mainly a minimalistic Neovim config with netrw.
 Also contains files for other editors/utils which Neovim will ignore.
 
 ## Neovim
+- This setup has been designed to work with Neovim 0.11
 - Clone the repo to `~/.config/nvim` for Neovim to pick it up.
 
 ## Tmux

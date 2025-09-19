@@ -13,83 +13,93 @@ local should_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
     -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
+    use { 'wbthomason/packer.nvim', commit = 'ea0cc3c5' }
 
-    -- file finder
+    -- File finder
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.4',
-        requires = { { 'nvim-lua/plenary.nvim' } }
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.4',
+        requires = {
+            { 'nvim-lua/plenary.nvim', commit = "b9fd522" },
+        },
     }
 
-    -- color scheme
-    use({
+    -- Color scheme
+    use {
         'Mofiqul/dracula.nvim',
         as = 'dracula',
-    })
+        commit = '041d923',
+    }
 
-    -- syntax highlighting
+    -- Syntax highlighting
     use {
         'nvim-treesitter/nvim-treesitter',
+        commit = '42fc28b',
         run = function()
             local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
             ts_update()
         end
     }
 
-    -- tabless navigation
-    use('theprimeagen/harpoon')
+    -- Tabless navigation
+    use { 'theprimeagen/harpoon', commit = '1bc17e3' }
 
-    -- git history
-    use('tpope/vim-fugitive')
+    -- Git history
+    use { 'tpope/vim-fugitive', commit = '61b51c0' }
 
-    -- lsp
-    use('neovim/nvim-lspconfig')
-    use('williamboman/mason.nvim')
-    use('williamboman/mason-lspconfig.nvim')
+    -- LSP
+    use { 'neovim/nvim-lspconfig', commit = '1f7fbc3' }
+    use { 'williamboman/mason.nvim', comit = '7dc4fac' }
+    use { 'williamboman/mason-lspconfig.nvim', commit = '7f9a39f' }
 
+    -- Completions
     use {
-      'hrsh7th/nvim-cmp',
-      requires = {
-        -- Autocompletion
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-path',
-        'hrsh7th/cmp-cmdline',
-        'hrsh7th/cmp-nvim-lua',
+        'hrsh7th/nvim-cmp',
+        requires = {
+            -- Autocompletion
+            { 'hrsh7th/cmp-nvim-lsp',         commit = 'bd5a7d6' },
+            { 'hrsh7th/cmp-buffer',           commit = 'b74fab3' },
+            { 'hrsh7th/cmp-path',             commit = 'c642487' },
+            { 'hrsh7th/cmp-cmdline',          commit = 'd126061' },
+            { 'hrsh7th/cmp-nvim-lua',         commit = 'f12408b' },
 
-        -- Snippets
-        'saadparwaiz1/cmp_luasnip',
-        'L3MON4D3/LuaSnip',
-        'rafamadriz/friendly-snippets',
-      },
+            -- Snippets
+            { 'saadparwaiz1/cmp_luasnip',     commit = '98d9cb5' },
+            { 'L3MON4D3/LuaSnip',             commit = 'b310491' },
+            { 'rafamadriz/friendly-snippets', commmit = '572f566' },
+        },
     }
 
-    -- bracket closing
-    use("windwp/nvim-autopairs")
+    -- Bracket closing
+    use { 'windwp/nvim-autopairs', commit = '23320e7' }
 
-    -- commenting
+    -- Commenting
     use {
         'numToStr/Comment.nvim',
+        commit = 'e30b7f2',
         config = function()
             require('Comment').setup()
         end
     }
 
-    -- code folidng
+    -- Code folidng
     use {
         'kevinhwang91/nvim-ufo',
-        requires = 'kevinhwang91/promise-async'
+        commit = 'd31e2a9',
+        requires = { 'kevinhwang91/promise-async', commit = '119e896' },
     }
 
-    -- status line
+    -- Status line
     use {
         'nvim-lualine/lualine.nvim',
-        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+        commit = 'b8c2315',
+        requires = { 'nvim-tree/nvim-web-devicons', commit = '6e51ca1', opt = true }
     }
 
-    -- lsp progress in status line
+    -- LSP progress in status line
     use {
         'linrongbin16/lsp-progress.nvim',
+        commit = 'f61cb7a',
         config = function()
             require('lsp-progress').setup()
         end

@@ -5,7 +5,7 @@ end
 
 dracula.setup({
     colors = {
-        bg = "#2B2D30",
+        bg = '#1E1F22',
     }
 })
 

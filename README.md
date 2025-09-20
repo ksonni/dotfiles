@@ -12,6 +12,7 @@ Also contains files for other editors/utils which Neovim will ignore.
 - `tm.sh` is a small script to create a tmux session or attach to an existing one based on 
 the name of the current directory with a pre-made Neovim + 1 terminal setup.
 - Convenient to make an alias for this called `tm` in the `~/.zshrc` file on MacOS.
+- On linux be sure to install 'xclip' for copy paste from tmux
 
 ## IntelliJ
 - Symlink `keymaps.xml` to IntelliJ's keymaps directory and choose "CustomKeymaps" from the settings window.

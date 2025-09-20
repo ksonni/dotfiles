@@ -12,6 +12,8 @@ function parse_git_branch() {
 if [[ "$(uname)" == "Darwin" ]]; then
     setopt PROMPT_SUBST
     export PROMPT='%F{cyan}%~%f%F{green}$(parse_git_branch)%f %F{normal}$%f '
+else
+    export PS1='\[\e[36m\]\w\[\e[0m\]\[\e[32m\]$(parse_git_branch)\[\e[0m\] \[\e[0m\]\$\[\e[0m\] '
 fi
 
 alias tm="~/.config/nvim/tm.sh"

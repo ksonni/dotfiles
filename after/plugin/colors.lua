@@ -7,7 +7,7 @@ dracula.setup({
     colors = {
         bg = '#1E1F22',
     },
-    transparent_bg = true,
+    -- transparent_bg = true,
 })
 
 vim.cmd.colorscheme('dracula')

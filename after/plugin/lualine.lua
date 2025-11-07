@@ -6,6 +6,8 @@ end
 lualine.setup {
     options = { theme = 'dracula' },
     sections = {
+        lualine_a = {},
+        lualine_b = {},
         lualine_c = {
             {
                 'filename',
@@ -15,9 +17,15 @@ lualine.setup {
         },
         lualine_x = {
             function()
-                return require('lsp-progress').progress()
+                local msg = require('lsp-progress').progress()
+                if msg ~= " LSP" then
+                    return msg
+                end
+                return ""
             end,
         },
+        lualine_y = {},
+        lualine_z = {},
     },
 }
 

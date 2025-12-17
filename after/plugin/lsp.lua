@@ -92,8 +92,10 @@ end
 
 local ok_mason, mason = pcall(require, "mason")
 local ok_mlsp, mlsp = pcall(require, "mason-lspconfig")
+local ok_mregistry, mregistry = pcall(require, "mason-registry")
 
-if not (ok_mason and ok_mlsp) then
+
+if not (ok_mason and ok_mlsp and ok_mregistry) then
     return
 end
 
@@ -103,7 +105,13 @@ local servers = {
     "lua_ls",
     "ts_ls",
     "gopls",
-    "pbls",
+    "pbls",    -- Protobuf
+    "pyright", -- Python LSP
+    "ruff",    -- Python linting/formatting
+}
+
+local other_packages = {
+    "mypy", -- Python type checking
 }
 
 mlsp.setup({
@@ -116,4 +124,11 @@ for _, srv in ipairs(servers) do
         on_attach = on_attach,
         capabilities = capabilities,
     })
+end
+
+for _, name in ipairs(other_packages) do
+    local pkg = mregistry.get_package(name)
+    if not pkg:is_installed() then
+        pkg:install()
+    end
 end

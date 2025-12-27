@@ -27,3 +27,12 @@ telescope.setup({
         file_ignore_patterns = ignore_patterns,
     },
 })
+
+-- Find and replace - use telescope to search, Ctr+Q & then run `:Replace s/old/new/g`
+vim.api.nvim_create_user_command("Replace", function(opts)
+    if vim.tbl_isempty(vim.fn.getqflist()) then
+        vim.notify("Quickfix list is empty", vim.log.levels.ERROR)
+        return
+    end
+    vim.cmd("cfdo " .. opts.args .. " | update")
+end, { nargs = 1 })

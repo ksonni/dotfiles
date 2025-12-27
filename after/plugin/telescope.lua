@@ -3,6 +3,7 @@ if not ok then
     return
 end
 local builtin = require('telescope.builtin')
+local actions = require('telescope.actions')
 
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
@@ -21,10 +22,27 @@ for pat in string.gmatch(ignore_env, '([^,]+)') do
     table.insert(ignore_patterns, pat)
 end
 
+local picker_mappings = {
+    -- Binding to send only selected files to quickfix
+    ["<C-s>"] = function(prompt_bufnr)
+        actions.send_selected_to_qflist(prompt_bufnr)
+        actions.open_qflist(prompt_bufnr)
+    end,
+    -- Binding to select all files
+    ["<C-g>"] = function(prompt_bufnr)
+        actions.select_all(prompt_bufnr)
+    end,
+}
+
 telescope.setup({
     defaults = {
         layout_strategy = 'vertical',
         file_ignore_patterns = ignore_patterns,
+        -- Only send selected files to quickfix with C-s
+        mappings = {
+            i = picker_mappings,
+            n = picker_mappings,
+        },
     },
 })
 

@@ -40,3 +40,17 @@ vim.keymap.set('n', '<C-w><Left>', '<cmd>vertical resize -10<CR>')
 vim.keymap.set('n', '<C-w><Up>', '<cmd>resize +5<CR>')
 vim.keymap.set('n', '<C-w><Down>', '<cmd>resize -5<CR>')
 
+-- Command to open a shell in the current file's directory
+vim.api.nvim_create_user_command("Sh", function()
+    if not vim.env.TMUX or vim.env.TMUX == "" then
+        vim.notify(":Shell: not running inside tmux", vim.log.levels.ERROR)
+        return
+    end
+    -- Current file's parent dir; fallback to current working dir
+    local dir = vim.fn.expand("%:p:h")
+    if dir == "" then
+        dir = vim.fn.getcwd()
+    end
+
+    vim.fn.system({ "tmux", "split-window", "-v", "-l", "20%", "-c", dir })
+end, {})

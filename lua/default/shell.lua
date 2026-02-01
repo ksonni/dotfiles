@@ -56,12 +56,63 @@ vim.api.nvim_create_user_command("Sh", function(opts)
     tmux_split_in_file_dir(opts.args, "Sh")
 end, { nargs = "*", complete = "shellcmd" })
 
--- :Test runs $VIMTESTCMD similar to Sh
-vim.api.nvim_create_user_command("Test", function()
+local function run_test_command()
     local test_command = vim.env.VIMTESTCMD or ""
     if test_command == "" then
         vim.notify(":Test: $VIMTESTCMD is not set", vim.log.levels.ERROR)
         return
     end
     tmux_split_in_file_dir(test_command, "Test")
-end, {})
+end
+
+-- :Test runs $VIMTESTCMD similar to Sh
+vim.api.nvim_create_user_command("Test", run_test_command, {})
+
+-- Runs a go test with if current func matches Test regex
+local function test_go_func()
+    local test_line, suffix
+
+    -- Iterate through the lines above and try to find the Test func name
+    local row = vim.api.nvim_win_get_cursor(0)[1] -- 1-based
+    local lines = vim.api.nvim_buf_get_lines(0, 0, row, false)
+    for i = #lines, 1, -1 do
+        suffix = lines[i]:match("^%s*func%s+Test([%w_]+)%s*%(")
+        if suffix then
+            test_line = lines[i]
+            break
+        end
+    end
+    if not test_line then
+        return false
+    end
+
+    local test_name = "Test" .. suffix
+
+    -- Current file's parent dir; fallback to current working dir
+    local dir = vim.fn.expand("%:p:h")
+    if dir == "" then dir = vim.fn.getcwd() end
+
+    local build_file = dir .. "/BUILD.bazel"
+
+    local cmd
+    if vim.fn.filereadable(build_file) == 1 then
+        cmd = ("bazel test :go_default_test --test_filter=%s --test_output=all"):format(vim.fn.shellescape(test_name))
+    else
+        cmd = ("go test -run ^%s$"):format(vim.fn.shellescape(test_name))
+    end
+
+    tmux_split_in_file_dir(cmd, "Test")
+    return true
+end
+
+vim.keymap.set("n", "<leader><leader>", function()
+    local type = vim.bo.filetype
+    if type == "lua" then
+        -- reload vim config
+        vim.cmd("so")
+    elseif type == "go" then
+        if not test_go_func() then
+            run_test_command()
+        end
+    end
+end)

@@ -62,6 +62,17 @@ capabilities.textDocument.foldingRange = {
 
 local ok_telescope, telescope = pcall(require, "telescope.builtin")
 
+-- Go to next/previous diagnostic, prioritizing errors
+local function goto_diagnostic(goto_fn)
+    local cur = vim.api.nvim_win_get_cursor(0)
+
+    goto_fn({ severity = vim.diagnostic.severity.ERROR })
+
+    if vim.deep_equal(cur, vim.api.nvim_win_get_cursor(0)) then
+        goto_fn()
+    end
+end
+
 -- LSP remaps
 local on_attach = function(_, bufnr)
     local map = function(mode, lhs, rhs, desc)
@@ -77,8 +88,8 @@ local on_attach = function(_, bufnr)
     map("n", "K", function() vim.lsp.buf.hover() end, "Hover")
     map("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, "Workspace symbols")
     map("n", "<leader>d", function() vim.diagnostic.open_float() end, "Line diagnostics")
-    map("n", "<leader>n", function() vim.diagnostic.goto_next() end, "Next diagnostic")
-    map("n", "<leader>p", function() vim.diagnostic.goto_prev() end, "Prev diagnostic")
+    map("n", "<leader>n", function() goto_diagnostic(vim.diagnostic.goto_next) end, "Next diagnostic")
+    map("n", "<leader>p", function() goto_diagnostic(vim.diagnostic.goto_prev) end, "Prev diagnostic")
     map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, "Code action")
     map("n", "<leader>o", function()
         vim.lsp.buf.code_action({

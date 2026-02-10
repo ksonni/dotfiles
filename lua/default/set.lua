@@ -25,3 +25,8 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 vim.opt.autoread = true
 vim.g.netrw_banner = 0
+
+-- Removes tildes on the left
+vim.opt.fillchars = {
+    eob = " ",
+}

@@ -14,6 +14,9 @@ the name of the current directory with a pre-made Neovim + 1 terminal setup.
 - Convenient to make an alias for this called `tm` in the `~/.zshrc` file on MacOS.
 - On linux be sure to install 'xclip' for copy paste from tmux
 
+## Wezterm
+- Symlink `.wezterm.lua` to `~/.wezterm.lua` to confiure wezterm.
+
 ## IntelliJ
 - Symlink `keymaps.xml` to IntelliJ's keymaps directory and choose "CustomKeymaps" from the settings window.
 - On Mac OS it's here - `~/Library/Application\ Support/JetBrains/IntelliJIdea2024.2/keymaps/`

@@ -5,7 +5,7 @@ end
 
 dracula.setup({
     colors = {
-        bg = '#1E1F22',
+        bg = os.getenv('EDITOR_BG') or '#1E1F22',
     },
     -- transparent_bg = true,
 })

@@ -30,6 +30,8 @@ return {
         style = 'Normal',
     }),
     font_size = font_size,
+    -- Disable font ligatures like !=
+    harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
 
     -- Colors
     colors = {

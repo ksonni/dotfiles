@@ -4,8 +4,7 @@
 -- <leader>gf on the hunk takes you to the file in a right split
 -- :Er - back to git root
 
--- Command to compare against master merge-base to review code. Occupies the whole window closing the base pane.
-vim.api.nvim_create_user_command("Review", function()
+local function open_review_panel(branch, cmd_fn)
     local function merge_base(ref)
         local r = vim.system({ "git", "merge-base", ref, "HEAD" }, { text = true }):wait()
         if r.code == 0 then
@@ -13,13 +12,17 @@ vim.api.nvim_create_user_command("Review", function()
         end
     end
 
-    local mb = merge_base("master") or merge_base("main")
-    if not mb then return end
+    local mb = ""
+    if branch ~= "" then
+        mb = merge_base(branch)
+    else
+        mb = merge_base("master") or merge_base("main")
+    end
 
     local prev_win = vim.api.nvim_get_current_win()
     local prev_tab = vim.api.nvim_get_current_tabpage()
 
-    vim.cmd("Git diff " .. mb)
+    vim.cmd(cmd_fn(mb))
 
     -- If Fugitive opened a new window, close the old one
     if vim.api.nvim_get_current_tabpage() == prev_tab then
@@ -28,7 +31,21 @@ vim.api.nvim_create_user_command("Review", function()
             vim.api.nvim_win_close(prev_win, true)
         end
     end
-end, { desc = "Code review diff vs master/main" })
+end
+
+-- Command to compare diffs against master merge-base to review code. Occupies the whole window closing the base pane.
+vim.api.nvim_create_user_command("Review", function(opts)
+    open_review_panel(opts.args, function(base)
+        return "Git diff " .. base
+    end)
+end, { nargs = "*", desc = "Code review diffs against master/main or custom branch" })
+
+-- Command to compare commits against merge-base to review code. Occupies the whole window closing the base pane.
+vim.api.nvim_create_user_command("Log", function(opts)
+    open_review_panel(opts.args, function(base)
+        return "Git log " .. base .. "..HEAD"
+    end)
+end, { nargs = "*", desc = "Code review commits vs master/main or custom branch" })
 
 -- Opens the window on the right if it exists, if not makes a new one
 local function open_right_or_vsplit(cmd)

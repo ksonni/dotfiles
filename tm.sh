@@ -9,10 +9,9 @@ if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
     tmux attach-session -t "$SESSION_NAME"
 else
     tmux new-session -d -s "$SESSION_NAME" -n editor
-    apply_bg
     tmux send-keys -t "$SESSION_NAME:editor" 'nvim .' C-m
     tmux new-window -t "$SESSION_NAME"
-    tmux select-window -t "$SESSION_NAME:0"
+    tmux select-window -t "$SESSION_NAME:1"
     tmux attach-session -t "$SESSION_NAME"
 fi
 

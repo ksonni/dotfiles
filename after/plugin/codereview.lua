@@ -3,6 +3,8 @@
 -- includes uncommited changes as well.
 -- <leader>gf on the hunk takes you to the file in a right split
 -- :Er - back to git root
+-- ]f and [f to do next file & previous file
+-- ]cc and [c to do next change & previous change
 
 local function open_review_panel(branch, cmd_fn)
     local function merge_base(ref)
@@ -129,3 +131,11 @@ vim.keymap.set("n", "<leader>gf", function()
 
     open_right_or_vsplit(("edit +%d %s"):format(math.max(1, target), vim.fn.fnameescape(path)))
 end, { silent = true })
+
+vim.keymap.set("n", "]f", function()
+    vim.fn.search("^diff --git", "W")
+end, { desc = "Next file in diff" })
+
+vim.keymap.set("n", "[f", function()
+    vim.fn.search("^diff --git", "bW")
+end, { desc = "Previous file in diff" })

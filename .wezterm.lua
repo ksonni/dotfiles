@@ -2,9 +2,13 @@ local wezterm = require 'wezterm'
 local mux = wezterm.mux
 
 wezterm.on('gui-startup', function(window)
-    local _, pane, window = mux.spawn_window(cmd or {})
+    local _, _, window = mux.spawn_window(cmd or {})
     local gui_window = window:gui_window();
-    gui_window:perform_action(wezterm.action.ToggleFullScreen, pane)
+    if wezterm.target_triple:find('apple%-darwin') then
+        gui_window:toggle_fullscreen()
+    else
+        gui_window:maximize()
+    end
 end)
 
 local colors = {
@@ -45,4 +49,5 @@ return {
     window_close_confirmation = 'NeverPrompt',
     window_background_opacity = 0.96,
     hide_tab_bar_if_only_one_tab = true,
+    window_decorations = "RESIZE",
 }

@@ -11,14 +11,19 @@ wezterm.on('gui-startup', function(window)
     end
 end)
 
+wezterm.GLOBAL.session = wezterm.GLOBAL.session or 0
+
+wezterm.on("window-config-reloaded", function(_, _)
+    wezterm.GLOBAL.session = wezterm.GLOBAL.session + 1
+end)
+
 local colors = {
-    "#1E1F22", -- Grey - graphite dark (default)
+    "#2A1F2E", -- Pink - muted plum (default)
+    "#2B1F1F", -- Red - dried blood
     "#222B26", -- Green - moss slate
     "#1F2430", -- Blue - night ocean
-    "#2B1F1F", -- Red - dried blood
-    "#2A211B", -- Orange - burnt umber
     "#2A271E", -- Yellow - muted mustard charcoal
-    "#2A1F2E", -- Pink - muted plum
+    "#1E1F22", -- Grey - graphite dark
 }
 
 local font_size = 10.0
@@ -39,7 +44,7 @@ return {
 
     -- Colors
     colors = {
-        background = colors[math.random(#colors)],
+        background = colors[(wezterm.GLOBAL.session % #colors) + 1],
         cursor_bg = '#FFFFFF',
         cursor_border = '#FFFFFF',
         foreground = "#FFFFFF"

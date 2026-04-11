@@ -30,10 +30,7 @@ require('lazy').setup({
     {
         'nvim-treesitter/nvim-treesitter',
         commit = '42fc28b',
-        build = function()
-            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-            ts_update()
-        end,
+        build = ':TSUpdate',
     },
 
     -- Tabless navigation

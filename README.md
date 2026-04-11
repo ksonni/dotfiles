@@ -17,6 +17,8 @@ Symlink the others:
 
 LSP via Mason (Go, TypeScript, Python, Lua, Protobuf), Telescope for navigation, Harpoon for file marks, Fugitive for git. Keymaps in `lua/default/remap.lua`.
 
+Plugins managed by lazy.nvim. Refresh packages with `:Lazy sync` (or `:Lazy` → `S`).
+
 Code review workflow: `:Review [branch]` diffs against master/main merge-base with commands to jump from diff hunks directly to the file at the relevant line.
 
 Go test runner detects the enclosing test function and uses `go test -run` or Bazel if a `BUILD.bazel` is present. Override with `$VIMTESTCMD`.

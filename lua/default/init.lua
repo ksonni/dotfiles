@@ -1,5 +1,5 @@
 require("default.remap")
-require("default.packer")
+require("default.lazy")
 require("default.set")
 require("default.snippets")
 require("default.shell")

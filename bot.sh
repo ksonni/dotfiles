@@ -2,8 +2,10 @@
 
 set -eu
 
-# Launches an AI agent in the assist pane, falling back to a standard shell if none is installed.
+# Launches an AI agent in the bot pane, falling back to a standard shell if none is installed.
 # Pass --yolo to enable all-permissions mode for agents.
+
+tmux set-option -pt "$TMUX_PANE" @role bot
 
 yolo=0
 for arg in "$@"; do

@@ -23,9 +23,9 @@ Go test runner detects the enclosing test function and uses `go test -run` or Ba
 
 ## AI Agent Integration
 
-`assist.sh` launches an AI agent in a tmux pane (tries `claude` → `copilot` → `codex`). Neovim can send prompts with file/line references directly to that pane via `:Bot`. Set `$VIMAGENT` to prefer a specific agent.
+`bot.sh` launches an AI agent in a tmux pane (tries `claude` → `copilot` → `codex`). Neovim can send prompts with file/line references directly to that pane via `:Bot`. Set `$VIMAGENT` to prefer a specific agent.
 
-Tmux bindings in the editor window open the assist pane with or without `--yolo`.
+Tmux bindings in the editor window open the bot pane with or without `--yolo`. The `bot` alias (from `.zshrc`) launches it directly from the terminal. Managing multiple bot panes through `:Bot` is currently not supported.
 
 ## Tmux
 

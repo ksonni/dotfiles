@@ -17,6 +17,7 @@ else
 fi
 
 alias tm="~/.config/nvim/tm.sh"
+alias bot="~/.config/nvim/bot.sh"
 
 export VISUAL=nvim
 export EDITOR=vi

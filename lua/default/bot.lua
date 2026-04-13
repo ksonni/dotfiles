@@ -9,6 +9,19 @@ local function bot_file_ref(line1, line2)
     return "@" .. path
 end
 
+local function list_bot_panes()
+    local raw = vim.trim(vim.fn.system(
+        [[tmux list-panes -a -F '#{window_id}|#{pane_id}|#{@role}' | awk -F'|' '$3=="bot" {print $1, $2}']]
+    ))
+    if raw == "" then return {} end
+    local panes = {}
+    for line in raw:gmatch("[^\n]+") do
+        local wid, pid = line:match("^(%S+)%s+(%S+)$")
+        table.insert(panes, { window_id = wid, pane_id = pid })
+    end
+    return panes
+end
+
 -- Yank relative file name for AI agents
 vim.keymap.set("n", "<leader>af", function()
     vim.fn.setreg("+", bot_file_ref())
@@ -57,16 +70,18 @@ vim.api.nvim_create_user_command("Bot", function(opts)
         msg = msg .. " " .. opts.args
     end
 
-    local pane_id = vim.trim(vim.fn.system(
-        [[tmux list-panes -a -F '#{pane_id} #{@role}' | awk '$2=="assist"{print $1; exit}']]
-    ))
-    if pane_id == "" then
-        vim.notify('No tmux pane titled "assist" found', vim.log.levels.ERROR)
+    local panes = list_bot_panes()
+    local chosen = panes[1]
+    if not chosen then
+        vim.notify('No bot pane found', vim.log.levels.ERROR)
         return
     end
 
+    local window_id, pane_id = chosen.window_id, chosen.pane_id
+
     vim.fn.system({
-        "tmux", "select-pane", "-t", pane_id, ";",
+        "tmux", "select-window", "-t", window_id, ";",
+        "select-pane", "-t", pane_id, ";",
         "run-shell", "sleep 0.2", ";", -- hack to make copilot UI behave
         "send-keys", "-l", msg, ";",
         "run-shell", "sleep 0.2", ";", -- hack to make copilot UI behave
@@ -75,5 +90,5 @@ vim.api.nvim_create_user_command("Bot", function(opts)
 end, {
     nargs = "+",
     range = true,
-    desc = "Send @file ref and prompt to tmux pane titled assist",
+    desc = "Send @file ref and prompt to tmux pane titled bot",
 })

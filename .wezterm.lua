@@ -26,9 +26,9 @@ local colors = {
     "#1E1F22", -- Grey - graphite dark
 }
 
-local font_size = 10.0
+local font_size = 9
 if wezterm.target_triple:find("apple") then
-    font_size = 13.0
+    font_size = 12
 end
 
 return {

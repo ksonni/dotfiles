@@ -73,15 +73,6 @@ return require('packer').startup(function(use)
     -- Bracket closing
     use { 'windwp/nvim-autopairs', commit = '23320e7' }
 
-    -- Commenting
-    use {
-        'numToStr/Comment.nvim',
-        commit = 'e30b7f2',
-        config = function()
-            require('Comment').setup()
-        end
-    }
-
     -- Code folidng
     use {
         'kevinhwang91/nvim-ufo',

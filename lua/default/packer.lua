@@ -49,7 +49,7 @@ return require('packer').startup(function(use)
 
     -- LSP
     use { 'neovim/nvim-lspconfig', commit = '1f7fbc3' }
-    use { 'williamboman/mason.nvim', comit = '7dc4fac' }
+    use { 'williamboman/mason.nvim', commit = '7dc4fac' }
     use { 'williamboman/mason-lspconfig.nvim', commit = '7f9a39f' }
 
     -- Completions
@@ -66,7 +66,7 @@ return require('packer').startup(function(use)
             -- Snippets
             { 'saadparwaiz1/cmp_luasnip',     commit = '98d9cb5' },
             { 'L3MON4D3/LuaSnip',             commit = 'b310491' },
-            { 'rafamadriz/friendly-snippets', commmit = '572f566' },
+            { 'rafamadriz/friendly-snippets', commit = '572f566' },
         },
     }
 

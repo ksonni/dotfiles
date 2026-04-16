@@ -96,7 +96,7 @@ local function test_go_func()
 
     local cmd
     if vim.fn.filereadable(build_file) == 1 then
-        cmd = ("bazel test :go_default_test --test_filter=%s --test_output=all"):format(vim.fn.shellescape(test_name))
+        cmd = ("bazel test :go_default_test --test_filter=%s --test_output=streamed"):format(vim.fn.shellescape(test_name))
     else
         cmd = ("go test -run ^%s$"):format(vim.fn.shellescape(test_name))
     end
@@ -105,14 +105,4 @@ local function test_go_func()
     return true
 end
 
-vim.keymap.set("n", "<leader><leader>", function()
-    local type = vim.bo.filetype
-    if type == "lua" then
-        -- reload vim config
-        vim.cmd("so")
-    elseif type == "go" then
-        if not test_go_func() then
-            run_test_command()
-        end
-    end
-end)
+return { test_go_func = test_go_func, run_test_command = run_test_command }

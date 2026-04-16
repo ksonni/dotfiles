@@ -1,5 +1,8 @@
 vim.g.mapleader = " "
 
+local shell = require("default.shell")
+local checkbox = require("default.checkbox")
+
 -- Just use :Ex dammit!
 -- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
@@ -52,3 +55,23 @@ vim.keymap.set('n', '<C-w><Right>', '<cmd>vertical resize +10<CR>')
 vim.keymap.set('n', '<C-w><Left>', '<cmd>vertical resize -10<CR>')
 vim.keymap.set('n', '<C-w><Up>', '<cmd>resize +5<CR>')
 vim.keymap.set('n', '<C-w><Down>', '<cmd>resize -5<CR>')
+
+vim.keymap.set("n", "<leader><leader>", function()
+    local type = vim.bo.filetype
+    if type == "lua" then
+        -- reload vim config
+        vim.cmd("so")
+    elseif type == "go" then
+        if not shell.test_go_func() then
+            shell.run_test_command()
+        end
+    elseif type == "markdown" then
+        checkbox.toggle()
+    end
+end)
+
+vim.keymap.set("v", "<leader><leader>", function()
+    if vim.bo.filetype == "markdown" then
+        checkbox.toggle_visual()
+    end
+end)

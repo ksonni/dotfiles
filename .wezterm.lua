@@ -41,6 +41,7 @@ return {
     font_size = font_size,
     -- Disable font ligatures like !=
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
+    warn_about_missing_glyphs = false,
 
     -- Colors
     colors = {

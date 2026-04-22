@@ -73,6 +73,25 @@ local function goto_diagnostic(count)
     end
 end
 
+-- Collects all known errors to a quickfix list
+local function workspace_errors()
+    local diags = vim.diagnostic.get(nil, { severity = vim.diagnostic.severity.ERROR })
+    table.sort(diags, function(a, b)
+        if a.severity ~= b.severity then return a.severity < b.severity end
+        if a.bufnr ~= b.bufnr then return (a.bufnr or 0) < (b.bufnr or 0) end
+        return a.lnum < b.lnum
+    end)
+    local items = vim.diagnostic.toqflist(diags)
+    vim.fn.setqflist({}, "r", { title = "Workspace Diagnostics", items = items })
+    if #items > 0 then
+        vim.cmd("copen")
+    else
+        vim.notify("No errors found", vim.log.levels.INFO)
+    end
+end
+
+vim.keymap.set("n", "<leader>ve", workspace_errors, { desc = "Workspace errors to a quickfix list" })
+
 -- LSP remaps
 local on_attach = function(_, bufnr)
     local map = function(mode, lhs, rhs, desc)

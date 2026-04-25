@@ -56,22 +56,27 @@ vim.keymap.set('n', '<C-w><Left>', '<cmd>vertical resize -10<CR>')
 vim.keymap.set('n', '<C-w><Up>', '<cmd>resize +5<CR>')
 vim.keymap.set('n', '<C-w><Down>', '<cmd>resize -5<CR>')
 
+-- Context aware execution
 vim.keymap.set("n", "<leader><leader>", function()
     local type = vim.bo.filetype
     if type == "lua" then
-        -- reload vim config
-        vim.cmd("so")
+        vim.cmd("so") -- reload vim config
     elseif type == "go" then
         if not shell.test_go_func() then
             shell.run_test_command()
         end
     elseif type == "markdown" then
-        checkbox.toggle()
+        vim.cmd("MarkdownPreviewToggle")
+    elseif type == "netrw" then
+        shell.open_file(vim.b.netrw_curdir .. "/" .. vim.fn.expand("<cfile>"))
     end
 end)
 
-vim.keymap.set("v", "<leader><leader>", function()
-    if vim.bo.filetype == "markdown" then
-        checkbox.toggle_visual()
-    end
+-- Toggle checkboxes
+vim.keymap.set("n", "<leader>c", function()
+    checkbox.toggle()
+end)
+
+vim.keymap.set("v", "<leader>c", function()
+    checkbox.toggle_visual()
 end)

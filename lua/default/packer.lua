@@ -96,6 +96,14 @@ return require('packer').startup(function(use)
         end
     }
 
+    -- Markdown preview (browser-based, with Mermaid support)
+    use {
+        'iamcco/markdown-preview.nvim',
+        commit = 'a923f5fc',
+        run = function() vim.fn["mkdp#util#install"]() end,
+        ft = { 'markdown', 'mermaid' },
+    }
+
     if should_bootstrap then
         require('packer').sync()
     end

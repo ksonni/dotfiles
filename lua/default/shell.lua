@@ -105,4 +105,8 @@ local function test_go_func()
     return true
 end
 
-return { test_go_func = test_go_func, run_test_command = run_test_command }
+local function open_file(path)
+    vim.system({ "open", path })
+end
+
+return { test_go_func = test_go_func, run_test_command = run_test_command, open_file = open_file }

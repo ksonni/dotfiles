@@ -31,6 +31,18 @@ if wezterm.target_triple:find("apple") then
     font_size = 12
 end
 
+wezterm.on('toggle-opacity', function(window, _)
+    local overrides = window:get_config_overrides() or {}
+    -- Prevent colour change on reload
+    wezterm.GLOBAL.session = wezterm.GLOBAL.session - 1
+    if overrides.window_background_opacity then
+        overrides.window_background_opacity = nil
+    else
+        overrides.window_background_opacity = 0.4
+    end
+    window:set_config_overrides(overrides)
+end)
+
 return {
     -- Font
     font = wezterm.font('JetBrainsMono Nerd Font Mono', {
@@ -56,4 +68,12 @@ return {
     window_background_opacity = 0.96,
     hide_tab_bar_if_only_one_tab = true,
     window_decorations = "RESIZE",
+
+    keys = {
+        {
+            key = 'o',
+            mods = 'CTRL|SHIFT',
+            action = wezterm.action.EmitEvent 'toggle-opacity',
+        },
+    },
 }

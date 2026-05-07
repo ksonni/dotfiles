@@ -100,7 +100,15 @@ return require('packer').startup(function(use)
     use {
         'iamcco/markdown-preview.nvim',
         commit = 'a923f5fc',
-        run = function() vim.fn["mkdp#util#install"]() end,
+        run = function()
+            vim.fn["mkdp#util#install"]()
+            local plugin_dir = vim.fn.stdpath('data') .. '/site/pack/packer/opt/markdown-preview.nvim'
+            local patch = vim.fn.stdpath('config') .. '/patches/markdown-preview-page.css.diff'
+            local out = vim.fn.system('patch -d ' .. plugin_dir .. ' -p1 --forward < ' .. patch)
+            if vim.v.shell_error ~= 0 then
+                error('markdown-preview patch failed:\n' .. out)
+            end
+        end,
         ft = { 'markdown', 'mermaid' },
     }
 

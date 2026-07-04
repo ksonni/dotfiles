@@ -140,6 +140,7 @@ local servers = {
     "pbls",    -- Protobuf
     "pyright", -- Python LSP
     "ruff",    -- Python linting/formatting
+    "clangd",  -- C development
 }
 
 local other_packages = {

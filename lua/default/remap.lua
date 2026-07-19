@@ -51,6 +51,13 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
+-- Split behaviour
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.keymap.set("n", "<C-w>v", "<C-w>v<C-w>l")
+vim.keymap.set("n", "<C-w>s", "<C-w>s<C-w>j")
+
+-- Split resize
 vim.keymap.set('n', '<C-w><Right>', '<cmd>vertical resize +10<CR>')
 vim.keymap.set('n', '<C-w><Left>', '<cmd>vertical resize -10<CR>')
 vim.keymap.set('n', '<C-w><Up>', '<cmd>resize +5<CR>')

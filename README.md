@@ -1,6 +1,6 @@
 # Dotfiles
 
-Neovim config (netrw, no nvim-tree) plus configs for tmux, Wezterm, and IntelliJ. Requires Neovim 0.11+.
+Neovim config (netrw, no nvim-tree) plus configs for tmux, Wezterm, and IntelliJ. Requires Neovim 0.12+.
 
 ## Setup
 
@@ -32,7 +32,7 @@ Tmux bindings in the editor window open the bot pane with or without `--yolo`. T
 `tm.sh` creates or attaches to a session named after the current directory, with an `editor` window (`nvim .`) and a terminal. Alias as `tm` in `.zshrc`.
 
 ## Roadmap
-- [ ] Upgrade plugins
+- [x] Upgrade plugins
     - [x] telescope
     - [x] dracula
     - [x] harpoon
@@ -43,7 +43,7 @@ Tmux bindings in the editor window open the bot pane with or without `--yolo`. T
     - [x] ufo
     - [x] lualine
     - [x] lsp-progress
-- [ ] Migrate to neovim 0.12
-- [ ] Upgrade treesitter-nvim
+- [x] Migrate to neovim 0.12
+- [x] Upgrade treesitter-nvim
 - [ ] Replace packer with lazy
 - [ ] Update bot for multi agent workflows

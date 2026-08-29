@@ -35,11 +35,8 @@ return require('packer').startup(function(use)
     -- Syntax highlighting
     use {
         'nvim-treesitter/nvim-treesitter',
-        commit = '42fc28b',
-        run = function()
-            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-            ts_update()
-        end
+        commit = '857651f',
+        run = ':TSUpdate',
     }
 
     -- Tabless navigation

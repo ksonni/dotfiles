@@ -14,7 +14,7 @@ harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
 
 local function toggle_harpoon_menu()
     harpoon.ui:toggle_quick_menu(harpoon:list(), {
-        ui_width_ratio = 0.5,
+        ui_width_ratio = 0.4,
         title = "",
     })
     if harpoon.ui.win_id and vim.api.nvim_win_is_valid(harpoon.ui.win_id) then

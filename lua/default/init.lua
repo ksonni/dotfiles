@@ -1,6 +1,5 @@
 require("default.remap")
 require("default.packer")
 require("default.set")
-require("default.snippets")
 require("default.shell")
 require("default.bot")

@@ -1,4 +1,6 @@
-local ok, harpoon = pcall(require, "harpoon")
+local ok, harpoon, harpoon_extensions = pcall(function()
+    return require("harpoon"), require("harpoon.extensions")
+end)
 if not ok then
     return
 end
@@ -8,7 +10,7 @@ harpoon:setup({
         save_on_toggle = true,
     },
 })
-harpoon:extend(require("harpoon.extensions").builtins.highlight_current_file())
+harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
 
 local function toggle_harpoon_menu()
     harpoon.ui:toggle_quick_menu(harpoon:list(), {

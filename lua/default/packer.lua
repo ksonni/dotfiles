@@ -88,14 +88,14 @@ return require('packer').startup(function(use)
     -- Status line
     use {
         'nvim-lualine/lualine.nvim',
-        commit = 'b8c2315',
-        requires = { 'nvim-tree/nvim-web-devicons', commit = '6e51ca1', opt = true }
+        commit = '221ce6b',
+        requires = { 'nvim-tree/nvim-web-devicons', commit = '2ae6958', opt = true }
     }
 
     -- LSP progress in status line
     use {
         'linrongbin16/lsp-progress.nvim',
-        commit = 'f61cb7a',
+        commit = 'f6d5af1',
         config = function()
             require('lsp-progress').setup()
         end

@@ -81,7 +81,7 @@ return require('packer').startup(function(use)
     -- Code folidng
     use {
         'kevinhwang91/nvim-ufo',
-        commit = 'd31e2a9',
+        commit = 'ab3eb12',
         requires = { 'kevinhwang91/promise-async', commit = '119e896' },
     }
 

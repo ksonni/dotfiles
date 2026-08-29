@@ -40,7 +40,7 @@ Tmux bindings in the editor window open the bot pane with or without `--yolo`. T
     - [ ] lspconfig & co
     - [ ] nvim-cmp & co
     - [ ] autopairs
-    - [ ] ufo
+    - [x] ufo
     - [x] lualine
     - [x] lsp-progress
 - [ ] Migrate to neovim 0.12

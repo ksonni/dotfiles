@@ -28,7 +28,7 @@ return require('packer').startup(function(use)
     use {
         'Mofiqul/dracula.nvim',
         as = 'dracula',
-        commit = '041d923',
+        commit = 'ae752c1',
     }
 
     -- Syntax highlighting

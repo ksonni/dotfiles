@@ -34,7 +34,7 @@ Tmux bindings in the editor window open the bot pane with or without `--yolo`. T
 ## Roadmap 2026
 - [ ] Upgrade plugins
     - [x] telescope
-    - [ ] dracula
+    - [x] dracula
     - [x] harpoon
     - [ ] fugitive
     - [ ] Lspconfig & co

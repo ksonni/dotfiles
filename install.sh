@@ -12,6 +12,20 @@ install_node() {
   fi
 }
 
+install_tree_sitter_cli() {
+  if command -v tree-sitter &>/dev/null; then
+    return
+  fi
+  if ! command -v cargo &>/dev/null; then
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      brew install rust
+    else
+      sudo apt-get install -y cargo
+    fi
+  fi
+  cargo install --locked tree-sitter-cli
+}
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
   brew install ripgrep tmux neovim
   xcode-select --install
@@ -21,6 +35,7 @@ else
 fi
 
 install_node
+install_tree_sitter_cli
 
 # Only needed if developing
 if [[ "$OSTYPE" == "darwin"* ]]; then

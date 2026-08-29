@@ -15,9 +15,13 @@ vim.diagnostic.config({
 
 -- Nicer borders for hover/signature
 vim.lsp.handlers["textDocument/hover"] =
-    vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+    function(err, result, ctx, config)
+        return vim.lsp.handlers.hover(err, result, ctx, vim.tbl_extend("force", config or {}, { border = "rounded" }))
+    end
 vim.lsp.handlers["textDocument/signatureHelp"] =
-    vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+    function(err, result, ctx, config)
+        return vim.lsp.handlers.signature_help(err, result, ctx, vim.tbl_extend("force", config or {}, { border = "rounded" }))
+    end
 
 -- Completion
 local ok_cmp, cmp = pcall(require, "cmp")
@@ -133,10 +137,12 @@ end
 
 mason.setup()
 
+-- When adding language support, also update after/plugin/treesitter.lua.
 local servers = {
     "lua_ls",
     "ts_ls",
     "gopls",
+    "marksman",
     "pbls",    -- Protobuf
     "pyright", -- Python LSP
     "ruff",    -- Python linting/formatting

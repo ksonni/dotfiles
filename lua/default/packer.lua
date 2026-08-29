@@ -42,7 +42,11 @@ return require('packer').startup(function(use)
     }
 
     -- Tabless navigation
-    use { 'theprimeagen/harpoon', commit = '1bc17e3' }
+    use {
+        'theprimeagen/harpoon',
+        commit = '87b1a35',
+        requires = { { 'nvim-lua/plenary.nvim', tag = "v0.1.4" } },
+    }
 
     -- Git history
     use { 'tpope/vim-fugitive', commit = '61b51c0' }

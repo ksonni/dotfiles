@@ -11,6 +11,7 @@ end
 
 local should_bootstrap = ensure_packer()
 
+-- NOTE: pin plugin commits instead of tags because several upstream tags lag behind
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use { 'wbthomason/packer.nvim', commit = 'ea0cc3c5' }
@@ -18,9 +19,9 @@ return require('packer').startup(function(use)
     -- File finder
     use {
         'nvim-telescope/telescope.nvim',
-        tag = "v0.2.2",
+        commit = '40aedd8',
         requires = {
-            { 'nvim-lua/plenary.nvim', tag = "v0.1.4" },
+            { 'nvim-lua/plenary.nvim', commit = '74b06c6' },
         },
     }
 
@@ -45,11 +46,11 @@ return require('packer').startup(function(use)
     use {
         'theprimeagen/harpoon',
         commit = '87b1a35',
-        requires = { { 'nvim-lua/plenary.nvim', tag = "v0.1.4" } },
+        requires = { { 'nvim-lua/plenary.nvim', commit = '74b06c6' } },
     }
 
     -- Git history
-    use { 'tpope/vim-fugitive', commit = '61b51c0' }
+    use { 'tpope/vim-fugitive', commit = '3b753cf' }
 
     -- LSP
     use { 'neovim/nvim-lspconfig', commit = '1f7fbc3' }

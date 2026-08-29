@@ -14,11 +14,16 @@ local function open_review_panel(branch, cmd_fn)
         end
     end
 
-    local mb = ""
+    local mb
     if branch ~= "" then
         mb = merge_base(branch)
     else
         mb = merge_base("master") or merge_base("main")
+    end
+
+    if not mb or mb == "" then
+        vim.notify("Review: no merge-base found; showing HEAD changes", vim.log.levels.WARN)
+        mb = "HEAD"
     end
 
     local prev_win = vim.api.nvim_get_current_win()

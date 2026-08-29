@@ -90,7 +90,7 @@ local function workspace_errors()
     end
 end
 
-vim.keymap.set("n", "<leader>ve", workspace_errors, { desc = "Workspace errors to a quickfix list" })
+vim.keymap.set("n", "<leader>we", workspace_errors, { desc = "Workspace errors to a quickfix list" })
 
 -- LSP remaps
 local on_attach = function(_, bufnr)
@@ -147,17 +147,17 @@ local other_packages = {
     "mypy", -- Python type checking
 }
 
-mlsp.setup({
-    ensure_installed = servers,
-    automatic_installation = true,
-})
-
 for _, srv in ipairs(servers) do
     vim.lsp.config(srv, {
         on_attach = on_attach,
         capabilities = capabilities,
     })
 end
+
+mlsp.setup({
+    ensure_installed = servers,
+    automatic_enable = servers,
+})
 
 for _, name in ipairs(other_packages) do
     local pkg = mregistry.get_package(name)

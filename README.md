@@ -37,7 +37,7 @@ Tmux bindings in the editor window open the bot pane with or without `--yolo`. T
     - [x] dracula
     - [x] harpoon
     - [x] fugitive
-    - [ ] lspconfig & co
+    - [x] lspconfig & co
     - [x] nvim-cmp & co
     - [x] autopairs
     - [x] ufo

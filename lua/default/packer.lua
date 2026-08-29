@@ -53,9 +53,9 @@ return require('packer').startup(function(use)
     use { 'tpope/vim-fugitive', commit = '3b753cf' }
 
     -- LSP
-    use { 'neovim/nvim-lspconfig', commit = '1f7fbc3' }
-    use { 'williamboman/mason.nvim', commit = '7dc4fac' }
-    use { 'williamboman/mason-lspconfig.nvim', commit = '7f9a39f' }
+    use { 'neovim/nvim-lspconfig', commit = '684cb45' }
+    use { 'williamboman/mason.nvim', commit = '2a6940a' }
+    use { 'williamboman/mason-lspconfig.nvim', commit = '40276c4' }
 
     -- Completions
     use {

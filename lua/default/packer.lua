@@ -60,18 +60,19 @@ return require('packer').startup(function(use)
     -- Completions
     use {
         'hrsh7th/nvim-cmp',
+        commit = '2ffe79f',
         requires = {
             -- Autocompletion
-            { 'hrsh7th/cmp-nvim-lsp',         commit = 'bd5a7d6' },
+            { 'hrsh7th/cmp-nvim-lsp',         commit = 'cbc7b02' },
             { 'hrsh7th/cmp-buffer',           commit = 'b74fab3' },
             { 'hrsh7th/cmp-path',             commit = 'c642487' },
             { 'hrsh7th/cmp-cmdline',          commit = 'd126061' },
-            { 'hrsh7th/cmp-nvim-lua',         commit = 'f12408b' },
+            { 'hrsh7th/cmp-nvim-lua',         commit = 'e3a22cb' },
 
             -- Snippets
             { 'saadparwaiz1/cmp_luasnip',     commit = '98d9cb5' },
-            { 'L3MON4D3/LuaSnip',             commit = 'b310491' },
-            { 'rafamadriz/friendly-snippets', commit = '572f566' },
+            { 'L3MON4D3/LuaSnip',             commit = '0abc8f3' },
+            { 'rafamadriz/friendly-snippets', commit = '6cd7280' },
         },
     }
 

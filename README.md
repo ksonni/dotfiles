@@ -31,7 +31,7 @@ Tmux bindings in the editor window open the bot pane with or without `--yolo`. T
 
 `tm.sh` creates or attaches to a session named after the current directory, with an `editor` window (`nvim .`) and a terminal. Alias as `tm` in `.zshrc`.
 
-## Roadmap 2026
+## Roadmap
 - [ ] Upgrade plugins
     - [x] telescope
     - [x] dracula
@@ -39,7 +39,7 @@ Tmux bindings in the editor window open the bot pane with or without `--yolo`. T
     - [x] fugitive
     - [ ] lspconfig & co
     - [ ] nvim-cmp & co
-    - [ ] autopairs
+    - [x] autopairs
     - [x] ufo
     - [x] lualine
     - [x] lsp-progress

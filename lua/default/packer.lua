@@ -76,7 +76,7 @@ return require('packer').startup(function(use)
     }
 
     -- Bracket closing
-    use { 'windwp/nvim-autopairs', commit = '23320e7' }
+    use { 'windwp/nvim-autopairs', commit = '430522f' }
 
     -- Code folidng
     use {

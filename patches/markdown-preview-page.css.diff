@@ -1,8 +1,0 @@
---- a/app/_static/page.css
-+++ b/app/_static/page.css
-@@ -41,7 +41,6 @@
- #page-ctn {
-   margin: 0 auto;
--  max-width: 900px;
-   color: var(--foreground-color);
- }

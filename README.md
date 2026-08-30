@@ -4,7 +4,7 @@ Neovim config (netrw, no nvim-tree) plus configs for tmux, Wezterm, and IntelliJ
 
 ## Setup
 
-Clone to `~/.config/nvim`. Run `install.sh` for dependencies (Mac/Linux).
+Clone to `~/.config/nvim` and run `install.sh` for dependencies (Mac/Linux).
 
 Symlink the others:
 - `~/.tmux.conf` → `.tmux.conf`
@@ -16,6 +16,10 @@ Symlink the others:
 ## Neovim
 
 LSP via Mason (Go, TypeScript, Python, Lua, Protobuf), Telescope for navigation, Harpoon for file marks, Fugitive for git. Keymaps in `lua/default/remap.lua`.
+
+Plugins are managed by lazy.nvim. Use `:Lazy sync` inside Neovim to install missing plugins, remove unused plugins, and update checkouts to match `lazy-lock.json`. Use `:Lazy update` when intentionally updating plugin pins and commit the changed `lazy-lock.json`.
+
+If any issues are seen after the packer to lazy.nvim migration, wipe the Neovim data dir with `rm -rf ~/.local/share/nvim` and restart.
 
 Code review workflow: `:Review [branch]` diffs against master/main merge-base with commands to jump from diff hunks directly to the file at the relevant line.
 
@@ -45,5 +49,6 @@ Tmux bindings in the editor window open the bot pane with or without `--yolo`. T
     - [x] lsp-progress
 - [x] Migrate to neovim 0.12
 - [x] Upgrade treesitter-nvim
-- [ ] Replace packer with lazy
+- [x] Replace packer with lazy
+- [ ] Investigate lsp-zero
 - [ ] Update bot for multi agent workflows

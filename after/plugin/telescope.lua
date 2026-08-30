@@ -43,6 +43,9 @@ telescope.setup({
             i = picker_mappings,
             n = picker_mappings,
         },
+        preview = {
+            treesitter = true,
+        }
     },
 })
 

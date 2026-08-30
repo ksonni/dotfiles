@@ -3,9 +3,24 @@ if not ok then
     return
 end
 
-treesitter.setup()
+treesitter.setup({
+    install_dir = vim.fn.stdpath("data") .. "/site",
+})
+vim.opt.runtimepath:prepend(vim.fn.stdpath("data") .. "/lazy/nvim-treesitter/runtime")
 
-local languages = { "vim", "query", "javascript", "typescript", "lua", "go", "c", "cpp", "python", "markdown", "markdown_inline" }
+local languages = {
+    "vim",
+    "query",
+    "javascript",
+    "typescript",
+    "lua",
+    "go",
+    "c",
+    "cpp",
+    "python",
+    "markdown",
+    "markdown_inline",
+}
 
 local parsers = vim.list_extend({ "vimdoc" }, languages)
 local filetypes = vim.list_extend({ "help" }, languages)

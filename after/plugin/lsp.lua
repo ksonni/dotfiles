@@ -20,7 +20,8 @@ vim.lsp.handlers["textDocument/hover"] =
     end
 vim.lsp.handlers["textDocument/signatureHelp"] =
     function(err, result, ctx, config)
-        return vim.lsp.handlers.signature_help(err, result, ctx, vim.tbl_extend("force", config or {}, { border = "rounded" }))
+        return vim.lsp.handlers.signature_help(err, result, ctx,
+            vim.tbl_extend("force", config or {}, { border = "rounded" }))
     end
 
 -- Completion
@@ -97,7 +98,10 @@ end
 vim.keymap.set("n", "<leader>we", workspace_errors, { desc = "Workspace errors to a quickfix list" })
 
 -- LSP remaps
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
+    -- Token highlighting with the current theme looks ugly, so disabling for now
+    client.server_capabilities.semanticTokensProvider = nil
+
     local map = function(mode, lhs, rhs, desc)
         vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, remap = false, silent = true, desc = desc })
     end
@@ -142,7 +146,6 @@ local servers = {
     "lua_ls",
     "ts_ls",
     "gopls",
-    "marksman",
     "pbls",    -- Protobuf
     "pyright", -- Python LSP
     "ruff",    -- Python linting/formatting

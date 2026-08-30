@@ -3,6 +3,7 @@ if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({
         "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath,
     })
+    vim.fn.system({ "git", "-C", lazypath, "checkout", "85c7ff3" })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -41,6 +42,7 @@ require("lazy").setup({
     { "neovim/nvim-lspconfig" },
     { "williamboman/mason.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
+    { "WhoIsSethDaniel/mason-tool-installer.nvim" },
 
     -- Completions
     {

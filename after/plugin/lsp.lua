@@ -132,10 +132,9 @@ end
 
 local ok_mason, mason = pcall(require, "mason")
 local ok_mlsp, mlsp = pcall(require, "mason-lspconfig")
-local ok_mregistry, mregistry = pcall(require, "mason-registry")
+local ok_mti, mti = pcall(require, "mason-tool-installer")
 
-
-if not (ok_mason and ok_mlsp and ok_mregistry) then
+if not (ok_mason and ok_mlsp and ok_mti) then
     return
 end
 
@@ -151,8 +150,7 @@ local servers = {
     "ruff",    -- Python linting/formatting
     "clangd",  -- C development
 }
-
-local other_packages = {
+local tools = {
     "mypy", -- Python type checking
 }
 
@@ -162,15 +160,10 @@ for _, srv in ipairs(servers) do
         capabilities = capabilities,
     })
 end
-
 mlsp.setup({
     ensure_installed = servers,
     automatic_enable = servers,
 })
-
-for _, name in ipairs(other_packages) do
-    local pkg = mregistry.get_package(name)
-    if not pkg:is_installed() then
-        pkg:install()
-    end
-end
+mti.setup({
+    ensure_installed = tools,
+})

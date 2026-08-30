@@ -12,8 +12,8 @@ local languages = {
     "markdown_inline",
 }
 
-local parsers = vim.list_extend({ "vimdoc" }, languages)
-local filetypes = vim.list_extend({ "help" }, languages)
+local parsers = vim.list_extend({ "vimdoc", "starlark" }, languages)
+local filetypes = vim.list_extend({ "help", "bzl" }, languages)
 
 local ok, treesitter = pcall(require, "nvim-treesitter")
 if not ok then

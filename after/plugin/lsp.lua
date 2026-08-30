@@ -21,6 +21,7 @@ local servers = {
     },
     ts_ls = {},   -- Typescript
     gopls = {},   -- Golang
+    starpls = {}, -- Bazel/Starlark
     pbls = {},    -- Protobuf
     pyright = {}, -- Python LSP
     ruff = {},    -- Python linting/formatting

@@ -1,3 +1,35 @@
+-- NOTE: when adding new languages, also update after/plugin/treesitter.lua.
+local servers = {
+    lua_ls = {
+        settings = {
+            Lua = {
+                runtime = {
+                    version = "LuaJIT",
+                },
+                diagnostics = {
+                    globals = { "vim" },
+                },
+                workspace = {
+                    library = vim.api.nvim_get_runtime_file("", true),
+                    checkThirdParty = false,
+                },
+                telemetry = {
+                    enable = false,
+                },
+            },
+        },
+    },
+    ts_ls = {},   -- Typescript
+    gopls = {},   -- Golang
+    pbls = {},    -- Protobuf
+    pyright = {}, -- Python LSP
+    ruff = {},    -- Python linting/formatting
+    clangd = {},  -- C development
+}
+local tools = {
+    mypy = {}, -- Python type checking
+}
+
 -- Diagnostics UI - icons + virtual text
 vim.diagnostic.config({
     signs = {
@@ -51,6 +83,7 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
+        { name = "nvim_lua" },
         (ok_luasnip and { name = "luasnip" } or nil),
     }, {
         { name = "buffer" },
@@ -140,30 +173,16 @@ end
 
 mason.setup()
 
--- When adding language support, also update after/plugin/treesitter.lua.
-local servers = {
-    "lua_ls",
-    "ts_ls",
-    "gopls",
-    "pbls",    -- Protobuf
-    "pyright", -- Python LSP
-    "ruff",    -- Python linting/formatting
-    "clangd",  -- C development
-}
-local tools = {
-    "mypy", -- Python type checking
-}
-
-for _, srv in ipairs(servers) do
-    vim.lsp.config(srv, {
+for srv, config in pairs(servers) do
+    vim.lsp.config(srv, vim.tbl_deep_extend("force", {
         on_attach = on_attach,
         capabilities = capabilities,
-    })
+    }, config))
 end
 mlsp.setup({
-    ensure_installed = servers,
-    automatic_enable = servers,
+    ensure_installed = vim.tbl_keys(servers),
+    automatic_enable = vim.tbl_keys(servers),
 })
 mti.setup({
-    ensure_installed = tools,
+    ensure_installed = vim.tbl_keys(tools),
 })

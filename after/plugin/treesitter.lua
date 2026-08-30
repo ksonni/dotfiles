@@ -1,13 +1,3 @@
-local ok, treesitter = pcall(require, "nvim-treesitter")
-if not ok then
-    return
-end
-
-treesitter.setup({
-    install_dir = vim.fn.stdpath("data") .. "/site",
-})
-vim.opt.runtimepath:prepend(vim.fn.stdpath("data") .. "/lazy/nvim-treesitter/runtime")
-
 local languages = {
     "vim",
     "query",
@@ -24,6 +14,16 @@ local languages = {
 
 local parsers = vim.list_extend({ "vimdoc" }, languages)
 local filetypes = vim.list_extend({ "help" }, languages)
+
+local ok, treesitter = pcall(require, "nvim-treesitter")
+if not ok then
+    return
+end
+
+treesitter.setup({
+    install_dir = vim.fn.stdpath("data") .. "/site",
+})
+vim.opt.runtimepath:prepend(vim.fn.stdpath("data") .. "/lazy/nvim-treesitter/runtime")
 
 treesitter.install(parsers)
 

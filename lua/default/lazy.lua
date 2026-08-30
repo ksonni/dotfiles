@@ -70,7 +70,7 @@ require("lazy").setup({
     },
 
     -- Bracket closing
-    { "windwp/nvim-autopairs", commit = "430522f" },
+    { "windwp/nvim-autopairs",     commit = "430522f" },
 
     -- Code folding
     {
@@ -82,13 +82,7 @@ require("lazy").setup({
     },
 
     -- Status line
-    {
-        "nvim-lualine/lualine.nvim",
-        commit = "221ce6b",
-        dependencies = {
-            { "nvim-tree/nvim-web-devicons", commit = "2ae6958" },
-        },
-    },
+    { "nvim-lualine/lualine.nvim", commit = "221ce6b" },
 
     -- LSP progress in status line
     {

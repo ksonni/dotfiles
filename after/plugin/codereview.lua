@@ -1,6 +1,7 @@
 -- TLDR:
--- :Review - convert the current window to code review against master merge-base,
--- includes uncommited changes as well.
+-- :GitReview - show commits since master/main merge-base.
+-- :GitReview! - convert the current window to code review diff against merge-base,
+-- includes uncommitted changes as well.
 -- <leader>gf on the hunk takes you to the file in a right split
 -- :Er - back to git root
 -- ]f and [f to do next file & previous file
@@ -22,7 +23,7 @@ local function open_review_panel(branch, cmd_fn)
     end
 
     if not mb or mb == "" then
-        vim.notify("Review: no merge-base found; showing HEAD changes", vim.log.levels.WARN)
+        vim.notify("GitReview: no merge-base found; showing HEAD changes", vim.log.levels.WARN)
         mb = "HEAD"
     end
 
@@ -40,12 +41,15 @@ local function open_review_panel(branch, cmd_fn)
     end
 end
 
--- Command to compare diffs against master merge-base to review code. Occupies the whole window closing the base pane.
-vim.api.nvim_create_user_command("Review", function(opts)
+-- Command to review commits against merge-base, or diffs with bang. Occupies the whole window closing the base pane.
+vim.api.nvim_create_user_command("GitReview", function(opts)
     open_review_panel(opts.args, function(base)
-        return "Git diff " .. base
+        if opts.bang then
+            return "Git diff " .. base
+        end
+        return "Git log " .. base .. "..HEAD"
     end)
-end, { nargs = "*", desc = "Code review diffs against master/main or custom branch" })
+end, { nargs = "*", bang = true, desc = "Code review commits vs master/main or custom branch; use ! for diff" })
 
 -- Command to compare commits against merge-base to review code. Occupies the whole window closing the base pane.
 vim.api.nvim_create_user_command("Log", function(opts)

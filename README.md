@@ -21,7 +21,7 @@ Plugins are managed by lazy.nvim. Use `:Lazy sync` inside Neovim to install miss
 
 If any issues are seen after the packer to lazy.nvim migration, wipe the Neovim data dir with `rm -rf ~/.local/share/nvim` and restart.
 
-Code review workflow: `:Review [branch]` diffs against master/main merge-base with commands to jump from diff hunks directly to the file at the relevant line.
+Code review workflow: `:GitReview [branch]` shows commits against master/main merge-base; `:GitReview! [branch]` opens the diff, with commands to jump from diff hunks directly to the file at the relevant line.
 
 Go test runner detects the enclosing test function and uses `go test -run` or Bazel if a `BUILD.bazel` is present. Override with `$VIMTESTCMD`.
 

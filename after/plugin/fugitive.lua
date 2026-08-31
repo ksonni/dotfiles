@@ -9,7 +9,8 @@ vim.api.nvim_create_user_command("GitTrace", function(opts)
     end
     local escaped_file = vim.fn.fnameescape(file)
     if opts.range > 0 then
-        vim.cmd(("Git log -L %d,%d:%s"):format(opts.line1, opts.line2, escaped_file))
+        local no_patch = opts.bang and "" or " --no-patch"
+        vim.cmd(("Git log%s -L %d,%d:%s"):format(no_patch, opts.line1, opts.line2, escaped_file))
         return
     end
     local patch = opts.bang and " --patch" or ""

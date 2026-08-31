@@ -20,3 +20,13 @@ end, {
     range = true,
     desc = "Trace git history for the current file or selected lines; use ! to include file diffs",
 })
+
+-- LSPs don't work on fugitive buffers and some of them can raise annying errors while
+-- viewing the change. So mark them as non-file buffers to prevent LSPs from attaching.
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function(args)
+        if vim.bo[args.buf].buftype == "" and vim.startswith(vim.api.nvim_buf_get_name(args.buf), "fugitive:///") then
+            vim.bo[args.buf].buftype = "nowrite"
+        end
+    end,
+})

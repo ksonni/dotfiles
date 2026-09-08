@@ -65,12 +65,12 @@ wezterm.on('toggle-opacity', function(window, _)
     if overrides.window_background_opacity then
         overrides.window_background_opacity = nil
     else
-        overrides.window_background_opacity = 0.4
+        overrides.window_background_opacity = 1
     end
     window:set_config_overrides(overrides)
 end)
 
-wezterm.on('rotate-background', function(window, _)
+wezterm.on('rotate-background', function(_, _)
     local next_index = (load_background_index() % #colors) + 1
     local prefs = load_prefs()
     prefs.background_index = next_index

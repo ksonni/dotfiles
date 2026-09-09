@@ -86,19 +86,19 @@ local function test_go_func()
         return false
     end
 
-    local test_name = "Test" .. suffix
-
     -- Current file's parent dir; fallback to current working dir
     local dir = vim.fn.expand("%:p:h")
     if dir == "" then dir = vim.fn.getcwd() end
 
     local build_file = dir .. "/BUILD.bazel"
 
+    local test_filter = vim.fn.shellescape("^Test" .. suffix .. "$")
+
     local cmd
     if vim.fn.filereadable(build_file) == 1 then
-        cmd = ("bazel test :go_default_test --test_filter=%s --test_output=streamed"):format(vim.fn.shellescape(test_name))
+        cmd = ("bazel test :go_default_test --test_filter=%s --test_output=streamed"):format(test_filter)
     else
-        cmd = ("go test -run ^%s$"):format(vim.fn.shellescape(test_name))
+        cmd = ("go test -run %s"):format(test_filter)
     end
 
     tmux_split_in_file_dir(cmd, "Test")

@@ -4,7 +4,6 @@ local mux = wezterm.mux
 local colors = {
     "#2A1F2E", -- Pink - muted plum (default)
     "#2B1F1F", -- Red - dried blood
-    "#222B26", -- Green - moss slate
     "#1F2430", -- Blue - night ocean
     "#2A271E", -- Yellow - muted mustard charcoal
     "#1E1F22", -- Grey - graphite dark

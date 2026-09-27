@@ -1,16 +1,6 @@
 local wezterm = require 'wezterm'
 local mux = wezterm.mux
 
-wezterm.on('gui-startup', function(window)
-    local _, _, window = mux.spawn_window(cmd or {})
-    local gui_window = window:gui_window();
-    if wezterm.target_triple:find('apple%-darwin') then
-        gui_window:toggle_fullscreen()
-    else
-        gui_window:maximize()
-    end
-end)
-
 local colors = {
     "#2A1F2E", -- Pink - muted plum (default)
     "#2B1F1F", -- Red - dried blood
@@ -18,6 +8,10 @@ local colors = {
     "#1F2430", -- Blue - night ocean
     "#2A271E", -- Yellow - muted mustard charcoal
     "#1E1F22", -- Grey - graphite dark
+}
+local opacities = {
+    1,
+    0.96,
 }
 
 local prefs_file = wezterm.home_dir .. "/.wezterm-prefs.json"
@@ -46,10 +40,17 @@ local function save_prefs(prefs)
     file:close()
 end
 
-local function load_background_index()
-    local prefs = load_prefs()
+local function get_background_index(prefs)
     local index = tonumber(prefs.background_index)
     if not index or index < 1 or index > #colors then
+        return 1
+    end
+    return math.floor(index)
+end
+
+local function get_opacity_index(prefs)
+    local index = tonumber(prefs.opacity_index)
+    if not index or index < 1 or index > #opacities then
         return 1
     end
     return math.floor(index)
@@ -60,25 +61,33 @@ if wezterm.target_triple:find("apple") then
     font_size = 12
 end
 
-wezterm.on('toggle-opacity', function(window, _)
-    local overrides = window:get_config_overrides() or {}
-    if overrides.window_background_opacity then
-        overrides.window_background_opacity = nil
+wezterm.on('gui-startup', function()
+    local _, _, window = mux.spawn_window(cmd or {})
+    local gui_window = window:gui_window();
+    if wezterm.target_triple:find('apple%-darwin') then
+        gui_window:toggle_fullscreen()
     else
-        overrides.window_background_opacity = 1
+        gui_window:maximize()
     end
-    window:set_config_overrides(overrides)
+end)
+
+wezterm.on('toggle-opacity', function(_, _)
+    local prefs = load_prefs()
+    local next_index = (get_opacity_index(prefs) % #opacities) + 1
+    prefs.opacity_index = next_index
+    save_prefs(prefs)
+    wezterm.reload_configuration()
 end)
 
 wezterm.on('rotate-background', function(_, _)
-    local next_index = (load_background_index() % #colors) + 1
     local prefs = load_prefs()
+    local next_index = (get_background_index(prefs) % #colors) + 1
     prefs.background_index = next_index
     save_prefs(prefs)
     wezterm.reload_configuration()
 end)
 
-local background_index = load_background_index()
+local prefs = load_prefs()
 
 return {
     -- Font
@@ -94,7 +103,7 @@ return {
 
     -- Colors
     colors = {
-        background = colors[background_index],
+        background = colors[get_background_index(prefs)],
         cursor_bg = '#FFFFFF',
         cursor_border = '#FFFFFF',
         foreground = "#FFFFFF"
@@ -102,7 +111,7 @@ return {
 
     -- Window
     window_close_confirmation = 'NeverPrompt',
-    window_background_opacity = 0.96,
+    window_background_opacity = opacities[get_opacity_index(prefs)],
     hide_tab_bar_if_only_one_tab = true,
     window_decorations = "RESIZE",
     native_macos_fullscreen_mode = true,

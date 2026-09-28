@@ -91,6 +91,9 @@ require("lazy").setup({
             vim.opt.rtp:prepend(plugin.dir)
             vim.fn["mkdp#util#install"]()
         end,
+        init = function()
+            vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/assets/markdown-preview.css"
+        end,
         ft = { "markdown", "mermaid" },
     },
 })

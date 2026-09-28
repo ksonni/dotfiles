@@ -11,7 +11,7 @@ end
 
 local function list_bot_panes()
     local raw = vim.trim(vim.fn.system(
-        [[tmux list-panes -a -F '#{window_id}|#{pane_id}|#{@role}' | awk -F'|' '$3=="bot" {print $1, $2}']]
+        [[tmux list-panes -s -F '#{window_id}|#{pane_id}|#{@role}' | awk -F'|' '$3=="bot" {print $1, $2}']]
     ))
     if raw == "" then return {} end
     local panes = {}
@@ -74,6 +74,10 @@ vim.api.nvim_create_user_command("Bot", function(opts)
     local chosen = panes[1]
     if not chosen then
         vim.notify('No bot pane found', vim.log.levels.ERROR)
+        return
+    end
+    if #panes > 1 then
+        vim.notify('Multiple bot panes found', vim.log.levels.ERROR)
         return
     end
 
